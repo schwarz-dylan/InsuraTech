@@ -141,7 +141,7 @@ namespace InsuraTech.DATA.EF.Metadata
     public partial class Location { }
     #endregion
 
-    #region MyRegion
+    #region OpenPosition
     public class OpenPositionMetadata
     {
         [Required(ErrorMessage = "*Position ID is required")]

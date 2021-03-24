@@ -1,7 +1,9 @@
-﻿using InsuraTech.Models;
+﻿using InsuraTech.DATA.EF;
+using InsuraTech.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -145,15 +147,62 @@ namespace InsuraTech.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase resume )
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                {                                      
+                       
+                        UserDetail newUserDeets = new UserDetail();
+                        newUserDeets.UserId = user.Id;
+                        newUserDeets.FirstName = model.FirstName;
+                        newUserDeets.LastName = model.LastName;
+                    //newUserDeets.ResumeFileName = model.ResumeFileName; //To-Do --Handle file upload
+                    #region File Upload
+                    if(resume != null)
+                    {
+                        //get pdf and assign to a variable
+                        string fileName = resume.FileName;
+
+                        //declare and assign ext value
+                        string ext = fileName.Substring(fileName.LastIndexOf("."));
+
+                        //declare a list of valid extensions
+                        string[] goodExts = { ".pdf", ".docx", ".rtf", ".rtx" };
+
+                        //check the ext variable (tolower()) against a valid list
+                        if(goodExts.Contains(ext.ToLower())&& (resume.ContentLength <= 4194304))//4194304 is the max by ASP.net (4MB)
+                        {
+                            //if its in the list rename using a guid
+                            fileName = Guid.NewGuid() + ext;
+
+
+                            //save to the webserver
+                            resume.SaveAs(Server.MapPath("~/Content/img/resume/" + fileName));
+
+                            //Make sure you are not deleting your default ---------Ask Jeff about this
+
+
+                            //only save if the file meets criteria imageName to the object
+                            newUserDeets.ResumeFileName = fileName;
+
+                        }//end if
+
+
+                    }//end if
+
+                    //If the file is bad (not in our list or NO file was included) the HiddenFor() in the view will care for retaining the value.
+
+                    #endregion
+
+                    InsuraTechEntities db = new InsuraTechEntities();
+                        db.UserDetails.Add(newUserDeets);
+                        db.SaveChanges();
+
+                        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;

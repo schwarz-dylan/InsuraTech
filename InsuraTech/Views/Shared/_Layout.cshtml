@@ -1,15 +1,42 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <title>InsuraTech - Find the right Job for you!</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
+    <!-- Favicons -->
+    <link href="~/Content/img/favicon.png" rel="icon">
+    <link href="~/Content/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Bootstrap CSS File -->
+    <link href="~/Content/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href="~/Content/lib/flat-ui/css/flat-ui.css" rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+    <!--Datatables.NET Style-->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+
+    <!-- =======================================================
+      Template Name: Good
+      Template URL: https://templatemag.com/good-bootstrap-corporate-template/
+      Author: TemplateMag.com
+      License: https://templatemag.com/license/
+    ======================================================= -->
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,33 +44,84 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">InsuraTech</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-                        <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                        <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
-                    }
+                    <li class="dropdown active">
+                        <a href="@Url.Action("Index", "Home")">Home</a>
+                    </li>
+                    <li><a href="@Url.Action("Index", "OpenPositions")">Careers</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+                    <li><a href="@Url.Action("Index", "UserAdmin")">Roles</a></li>
+                    <li><a href="@Url.Action("Index", "Aplications")">My Apps</a></li>
+                    @*<li class="dropdown">
+                        <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Applications <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "Applications")">Applications</a></li>
+                            <li><a href="@Url.Action("Index", "ApplicationStatus")">Application Status</a></li>
+                            
+                        </ul>
+                    </li>*@
+                    @*<li class="dropdown">
+                        <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Portfolios <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/Content/portfolio.html">Portfolio</a></li>
+                            <li><a href="~/Content/portfolio4.html">Portfolio 4 Columns</a></li>
+                            <li><a href="~/Content/project-single.html">Single Project</a></li>
+                        </ul>
+                    </li>*@
+                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+            <!--/.nav-collapse -->
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
+    <div>@RenderBody()</div>
+
+
+
+    
+    
+
+        <div id="copyrights">
+            <div class="container">
+
+                <p>
+                    &copy; Copyright @DateTime.Today.Year <strong>InsuraTech</strong>. All Rights Reserved
+                </p>
+                <div class="credits">
+                    <!--
+                  You are NOT allowed to delete the credit link to TemplateMag with free version.
+                  You can delete the credit link only if you bought the pro version.
+                  Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/good-bootstrap-corporate-template/
+                  Licensing information: https://templatemag.com/license/
+                -->
+                    Created with Good template by <a href="~/Content/https://templatemag.com/">TemplateMag </a>
+                    Converted by <a href="https://dylanschwarz.com">Dylan Schwarz</a>
+                </div>
+            </div>
+        </div>
+    
+    
+    <!-- / copyrights -->
+    <!-- JavaScript Libraries -->
+    <script src="~/Content/lib/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+    <script src="~/Content/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/lib/php-mail-form/validate.js"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="~/Content/js/main.js"></script>
+
+
     @RenderSection("scripts", required: false)
+
+
 </body>
 </html>
