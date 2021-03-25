@@ -28,7 +28,7 @@ namespace InsuraTech.Controllers
             UserDetail ud = db.UserDetails.Where(x => x.UserId == userId).SingleOrDefault();
             if(ud.ResumeFileName == null)
             {
-                Session["ErrorMessage"] = "Please add a resume to your profile to apply.";
+                Session["ErrorMessage"] = "PLEASE ADD A RESUME TO YOUR PROFILE TO APPLY";
                     return RedirectToAction("Index");
             }//end if
             Session["ErrorMessage"] = null;

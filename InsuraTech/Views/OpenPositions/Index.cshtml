@@ -7,9 +7,9 @@
 <td class="container">
     <h2>@ViewBag.Title</h2>
 
-    @if(ViewBag.ErrorMessage != null)
+    @if(Session["ErrorMessage"] != null)
     {
-        <p>@ViewBag.ErrorMessage</p>
+        <p>@Session["ErrorMessage"]</p>
     }
 
     <p>

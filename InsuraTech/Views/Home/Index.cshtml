@@ -13,7 +13,11 @@
         <h3>Welcome to our new Job Board site.</h3>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
         <br>
-        <a href="@Url.Action("Index", "OpenPositions")"><button class="btn btn-embossed btn-primary">See Job Openings</button></a>
+        @if (Request.IsAuthenticated && User.IsInRole("Admin") || Request.IsAuthenticated && User.IsInRole("Manager") || Request.IsAuthenticated && User.IsInRole("Employee"))
+        {
+            <a href="@Url.Action("Index", "OpenPositions")"><button class="btn btn-embossed btn-primary">See Job Openings</button></a>
+        }
+
     </div>
     <!-- /container -->
 </div>

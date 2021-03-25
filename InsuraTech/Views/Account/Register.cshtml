@@ -41,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(m => m.ResumeFileName, new { @class = "col-md-2 control-label" })
             <div class="col-md-9">
-                <input type="file" name="Resume" />
+                <input type="file" @*required="required"*@ name="Resume" />
                 @*@Html.TextBoxFor(m => m.ResumeFileName, new { @class = "form-control" })*@
             </div>
         </div>

@@ -733,6 +733,7 @@
     <Content Include="_Archive\Good\lib\flat-ui\fonts\lato\lato-regular-webfont.ttf" />
     <Content Include="_Archive\Good\lib\flat-ui\fonts\lato\lato-regular-webfont.woff" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\EmailConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
