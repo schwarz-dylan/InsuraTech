@@ -10,7 +10,7 @@ using InsuraTech.DATA.EF;
 
 namespace InsuraTech.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class PositionsController : Controller
     {
         private InsuraTechEntities db = new InsuraTechEntities();

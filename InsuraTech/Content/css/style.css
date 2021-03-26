@@ -5,8 +5,18 @@
 * License: https://templatemag.com/license/
 */
 
+footer{
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
+
+}
 body {
-  padding-top: 75px
+  padding-top: 75px;
+  height:100%;
+  padding-bottom:10%;
+  
 }
 
 .centered {
@@ -805,9 +815,13 @@ body {
 /* Copyrights */
 
 #copyrights {
-  background: #25384b;
-  padding: 20px 0;
-  text-align: center;
+    background: #25384b;
+    padding: 20px 0;
+    text-align: center;
+    position:fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 #copyrights p {

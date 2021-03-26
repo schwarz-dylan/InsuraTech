@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InsuraTech.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace InsuraTech.Controllers
 {
@@ -18,6 +19,15 @@ namespace InsuraTech.Controllers
         // GET: UserDetails
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated && User.IsInRole("Employee"))
+            {
+                string userId = User.Identity.GetUserId();
+
+                var empDetails = db.UserDetails.Where(emp => emp.UserId == userId);
+
+
+                return View(empDetails.ToList());
+            }
             return View(db.UserDetails.ToList());
         }
 

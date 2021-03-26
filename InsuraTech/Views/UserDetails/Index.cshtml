@@ -37,9 +37,19 @@
                     @Html.DisplayFor(modelItem => item.ResumeFileName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                    @if (Request.IsAuthenticated && User.IsInRole("Employee"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserId })
+                    }
+                    |
+
                     @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin") || Request.IsAuthenticated && User.IsInRole("Employee"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+                    }
+
                 </td>
             </tr>
         }

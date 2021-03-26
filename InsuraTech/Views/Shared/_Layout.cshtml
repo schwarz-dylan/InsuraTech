@@ -49,67 +49,74 @@
             <div class="navbar-collapse collapse">
                 @if (Request.IsAuthenticated && User.IsInRole("Admin") || Request.IsAuthenticated && User.IsInRole("Manager") || Request.IsAuthenticated && User.IsInRole("Employee"))
                 {
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown active">
-                            <a href="@Url.Action("Index", "Home")">Home</a>
-                        </li>
-                        <li><a href="@Url.Action("Index", "OpenPositions")">Careers</a></li>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown active">
+                        <a href="@Url.Action("Index", "Home")">Home</a>
+                    </li>
+                    <li><a href="@Url.Action("Index", "OpenPositions")">Careers</a></li>
 
+
+
+
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Manager"))
+                    {
+                        <li><a href="@Url.Action("Index", "Applications")">Applications</a></li>
+
+
+                    }
+
+
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li><a href="@Url.Action("Index", "Positions")">Positions</a></li>
+                        <li><a href="@Url.Action("Index", "Locations")">Locations</a></li>
+
+                        <li class="dropdown">
+                            <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "Applications")">Applications</a></li>
+                                <li><a href="@Url.Action("Index", "ApplicationStatus")">Application Statuses</a></li>
+                                <li><a href="@Url.Action("Index", "UsersAdmin")">User Roles</a></li>
+                                <li><a href="@Url.Action("Index", "RolesAdmin")">Admin Roles</a></li>
+                                <li><a href="@Url.Action("Index", "UserDetails")">User Details</a></li>
+
+                            </ul>
+                        </li>
+                    }
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Employee"))
+                    {
+                        <li><a href="@Url.Action("Index", "UserDetails")">My Profile</a></li>
+                        <li><a href="@Url.Action("Index", "Applications")">My Apps</a></li>
                         <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
 
+                    }
+
+                    @*<li class="dropdown">
+            <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Portfolios <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="~/Content/portfolio.html">Portfolio</a></li>
+                <li><a href="~/Content/portfolio4.html">Portfolio 4 Columns</a></li>
+                <li><a href="~/Content/project-single.html">Single Project</a></li>
+            </ul>
+        </li>*@
+
+
+                    @*<li class="dropdown">
+            <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    @Html.Partial("_LoginPartial")
+                </li>
+            </ul>
+        </li>*@
 
 
 
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin") || Request.IsAuthenticated && User.IsInRole("Manager"))
-                        {
-                            <li><a href="@Url.Action("Index", "Positions")">Positions</a></li>
-                            <li><a href="@Url.Action("Index", "Locations")">Locations</a></li>@*Still need to make it where managers are only able to view Positions at there location only*@
-                            <li><a href="@Url.Action("Index", "Applications")">Applications</a></li> @*Still need to make it where Employees can view applications but it only pulls them up based on there applications. As well as managers only being able to view applications at there location only*@
 
-
-                        }
-
-
-
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <li class="dropdown">
-                                <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Roles <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="@Url.Action("Index", "UsersAdmin")">User Roles</a></li>
-                                    <li><a href="@Url.Action("Index", "RolesAdmin")">Admin Roles</a></li>
-
-                                </ul>
-                            </li>
-                        }
-
-                        @if (Request.IsAuthenticated && User.IsInRole("Employee"))
-                        {
-                            <li><a href="@Url.Action("Index", "UserDetails")">My Profile</a></li>
-                            <li><a href="@Url.Action("Index", "Applications")">My Apps</a></li>
-                        }
-
-                        @*<li class="dropdown">
-                                <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Portfolios <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="~/Content/portfolio.html">Portfolio</a></li>
-                                    <li><a href="~/Content/portfolio4.html">Portfolio 4 Columns</a></li>
-                                    <li><a href="~/Content/project-single.html">Single Project</a></li>
-                                </ul>
-                            </li>*@
-
-
-                        @*<li class="dropdown">
-                                <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        @Html.Partial("_LoginPartial")
-                                    </li>
-                                </ul>
-                            </li>*@
-
-
-                    </ul>
+                </ul>
                 }
 
                 @Html.Partial("_LoginPartial")
@@ -127,7 +134,7 @@
 
 
 
-    <div id="copyrights">
+    <div class="footer" id="copyrights">
         <div class="container">
 
             <p>

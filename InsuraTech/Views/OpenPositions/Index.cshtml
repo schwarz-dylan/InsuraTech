@@ -64,11 +64,20 @@
                         </td>
                     }
 
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId })
-                    </td>
+                        <td>
+                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId })
+                            }
+                            |
+                            @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }) |
+
+                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId })
+                            }
+
+                        </td>
                 </tr>
             }
         </tbody>
