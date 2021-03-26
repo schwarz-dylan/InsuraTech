@@ -86,27 +86,27 @@
                         @if (Request.IsAuthenticated && User.IsInRole("Employee"))
                         {
                             <li><a href="@Url.Action("Index", "UserDetails")">My Profile</a></li>
-                            <li><a href="@Url.Action("Index", "Aplications")">My Apps</a></li>
+                            <li><a href="@Url.Action("Index", "Applications")">My Apps</a></li>
                         }
 
                         @*<li class="dropdown">
-                    <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Portfolios <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="~/Content/portfolio.html">Portfolio</a></li>
-                        <li><a href="~/Content/portfolio4.html">Portfolio 4 Columns</a></li>
-                        <li><a href="~/Content/project-single.html">Single Project</a></li>
-                    </ul>
-                </li>*@
+                                <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Portfolios <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="~/Content/portfolio.html">Portfolio</a></li>
+                                    <li><a href="~/Content/portfolio4.html">Portfolio 4 Columns</a></li>
+                                    <li><a href="~/Content/project-single.html">Single Project</a></li>
+                                </ul>
+                            </li>*@
 
 
                         @*<li class="dropdown">
-                    <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            @Html.Partial("_LoginPartial")
-                        </li>
-                    </ul>
-                </li>*@
+                                <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.Partial("_LoginPartial")
+                                    </li>
+                                </ul>
+                            </li>*@
 
 
                     </ul>
@@ -124,29 +124,29 @@
 
 
 
-    
-    
 
-        <div id="copyrights">
-            <div class="container">
 
-                <p>
-                    &copy; Copyright @DateTime.Today.Year <strong>InsuraTech</strong>. All Rights Reserved
-                </p>
-                <div class="credits">
-                    <!--
+
+    <div id="copyrights">
+        <div class="container">
+
+            <p>
+                &copy; Copyright @DateTime.Today.Year <strong>InsuraTech</strong>. All Rights Reserved
+            </p>
+            <div class="credits">
+                <!--
                   You are NOT allowed to delete the credit link to TemplateMag with free version.
                   You can delete the credit link only if you bought the pro version.
                   Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/good-bootstrap-corporate-template/
                   Licensing information: https://templatemag.com/license/
                 -->
-                    Created with Good template by <a href="~/Content/https://templatemag.com/">TemplateMag </a>
-                    Converted by <a href="https://dylanschwarz.com">Dylan Schwarz</a>
-                </div>
+                Created with Good template by <a href="~/Content/https://templatemag.com/">TemplateMag </a>
+                Converted by <a href="https://dylanschwarz.com">Dylan Schwarz</a>
             </div>
         </div>
-    
-    
+    </div>
+
+
     <!-- / copyrights -->
     <!-- JavaScript Libraries -->
     <script src="~/Content/lib/jquery/jquery.min.js"></script>
@@ -159,6 +159,7 @@
     <!-- Template Main Javascript File -->
     <script src="~/Content/js/main.js"></script>
 
+    <script src="//cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
 
     @RenderSection("scripts", required: false)
 

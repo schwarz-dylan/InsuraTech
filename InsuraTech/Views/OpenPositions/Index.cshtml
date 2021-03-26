@@ -4,10 +4,10 @@
     ViewBag.Title = "Job Openings";
 }
 
-<td class="container">
+<div class="container">
     <h2>@ViewBag.Title</h2>
 
-    @if(Session["ErrorMessage"] != null)
+    @if (Session["ErrorMessage"] != null)
     {
         <p>@Session["ErrorMessage"]</p>
     }
@@ -15,52 +15,72 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Location.StoreNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location.State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Position.Title)
-            </th>
-            <th></th>
-        </tr>
 
-        @foreach (var item in Model)
-        {
+    <table class="table display">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location.StoreNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location.State)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Position.Title)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location.StoreNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Position.Title)
+                </th>
                 @if (Request.IsAuthenticated && User.IsInRole("Employee"))
                 {
-                <td>                 
-                     @Html.ActionLink("Apply", "Apply", new { id = item.OpenPositionId }) 
-                </td>
+                    <th>
+                    </th>
                 }
+                <th></th>
 
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId })
-                </td>
             </tr>
-        }
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location.StoreNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Position.Title)
+                    </td>
+                    @if (Request.IsAuthenticated && User.IsInRole("Employee"))
+                    {
+                        <td>
+                            @Html.ActionLink("Apply", "Apply", new { id = item.OpenPositionId })
+                        </td>
+                    }
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId })
+                    </td>
+                </tr>
+            }
+        </tbody>
 
     </table>
 </div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+
+}

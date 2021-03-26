@@ -10,6 +10,7 @@ using InsuraTech.DATA.EF;
 
 namespace InsuraTech.Controllers
 {
+    [Authorize]
     public class ApplicationStatusController : Controller
     {
         private InsuraTechEntities db = new InsuraTechEntities();

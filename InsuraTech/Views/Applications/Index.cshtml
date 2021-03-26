@@ -10,31 +10,37 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ManagerNotes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ResumeFileName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-            </th>
-            <th></th>
-        </tr>
+    <table class="table display">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ManagerNotes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ResumeFileName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationStatu.StatusName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserDetail.LastName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
-        @foreach (var item in Model)
-        {
+        <tbody>
+            @foreach (var item in Model)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.ApplicationDate)
@@ -55,12 +61,29 @@
                     @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ApplicationId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })
+                    @Html.DisplayFor(modelItem => item.UserDetail.LastName)
+                </td>
+                <td>
+                    @if (Request.IsAuthenticated && User.IsInRole("Manager"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId }) 
+                    }
+
+                    @Html.ActionLink("Details", "Details", new { id = item.ApplicationId }) 
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })*@
                 </td>
             </tr>
-        }
+            }
+        </tbody>
 
     </table>
 </div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+    }
+

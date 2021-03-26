@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InsuraTech.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace InsuraTech.Controllers
 {
@@ -15,13 +16,36 @@ namespace InsuraTech.Controllers
         private InsuraTechEntities db = new InsuraTechEntities();
 
         // GET: Applications
+        [Authorize]
         public ActionResult Index()
         {
-            var applications = db.Applications.Include(a => a.ApplicationStatu).Include(a => a.OpenPosition).Include(a => a.UserDetail);
-            return View(applications.ToList());
+            if (Request.IsAuthenticated && User.IsInRole("Manager"))
+            {
+                string userId = User.Identity.GetUserId();
+
+                var manApplications = db.Applications.Where(man => man.OpenPosition.Location.ManagerId == userId).Include(o => o.OpenPosition.Location).Include(o => o.OpenPosition.Position);
+
+                return View(manApplications.ToList());
+            }
+
+            if (Request.IsAuthenticated && User.IsInRole("Employee"))
+            {
+                string userId = User.Identity.GetUserId();
+
+                var empApplication = db.Applications.Where(emp => emp.UserId == userId);
+                                                    
+
+                return View(empApplication.ToList());
+            }
+
+                var applications = db.Applications.Include(a => a.ApplicationStatu).Include(a => a.OpenPosition).Include(a => a.UserDetail);
+                return View(applications.ToList());
+            
+
         }
 
         // GET: Applications/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +61,7 @@ namespace InsuraTech.Controllers
         }
 
         // GET: Applications/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.AplicationStatus = new SelectList(db.ApplicationStatus, "ApplicationStatusId", "StatusName");
@@ -49,6 +74,7 @@ namespace InsuraTech.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ApplicationId,OpenPositionId,UserId,ApplicationDate,ManagerNotes,AplicationStatus,ResumeFileName")] Application application)
         {
@@ -66,6 +92,7 @@ namespace InsuraTech.Controllers
         }
 
         // GET: Applications/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,6 +114,7 @@ namespace InsuraTech.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ApplicationId,OpenPositionId,UserId,ApplicationDate,ManagerNotes,AplicationStatus,ResumeFileName")] Application application)
         {
@@ -103,6 +131,7 @@ namespace InsuraTech.Controllers
         }
 
         // GET: Applications/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,6 +147,7 @@ namespace InsuraTech.Controllers
         }
 
         // POST: Applications/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
