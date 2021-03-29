@@ -15,7 +15,7 @@ footer{
 body {
   padding-top: 75px;
   height:100%;
-  padding-bottom:10%;
+  padding-bottom:18%;
   
 }
 
@@ -238,13 +238,13 @@ body {
 }
 
 #headerwrap-2 {
-  background: url(../img/header2-bg.jpg) no-repeat center top;
+  background: url('../img/Logo GIF 4.gif') no-repeat center top;
   margin-top: 0;
   padding-top: 160px;
   text-align: center;
   background-attachment: relative;
   background-position: center center;
-  min-height: 600px;
+  min-height: 400px;
   width: 100%;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
