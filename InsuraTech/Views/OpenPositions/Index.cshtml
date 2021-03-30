@@ -12,9 +12,14 @@
         <p>@Session["ErrorMessage"]</p>
     }
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+
+
 
     <table class="table display">
         <thead>
@@ -64,20 +69,20 @@
                         </td>
                     }
 
-                        <td>
-                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId })
-                            }
-                            |
-                            @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }) |
+                    <td>
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin") || Request.IsAuthenticated && User.IsInRole("Manager"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionId })
+                        }
+                        |
+                        @Html.ActionLink("Details", "Details", new { id = item.OpenPositionId }) |
 
-                            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                            {
-                                @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId })
-                            }
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin") || Request.IsAuthenticated && User.IsInRole("Manager"))
+                        {
+                            @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionId })
+                        }
 
-                        </td>
+                    </td>
                 </tr>
             }
         </tbody>

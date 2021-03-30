@@ -89,16 +89,65 @@ namespace InsuraTech.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,FirstName,LastName,ResumeFileName")] UserDetail userDetail)
+        public ActionResult Edit([Bind(Include = "UserId,FirstName,LastName,ResumeFileName")] UserDetail userDetail, HttpPostedFileBase resume)
         {
             if (ModelState.IsValid)
             {
+                
+
+                //newUserDeets.ResumeFileName = model.ResumeFileName; //To-Do --Handle file upload
+                #region File Upload
+                if (resume != null)
+                {
+                    //get pdf and assign to a variable
+                    string fileName = resume.FileName;
+
+                    //declare and assign ext value
+                    string ext = fileName.Substring(fileName.LastIndexOf("."));
+
+                    //declare a list of valid extensions
+                    string[] goodExts = { ".pdf", ".docx", ".rtf", ".rtx" };
+
+                    //check the ext variable (tolower()) against a valid list
+                    if (goodExts.Contains(ext.ToLower()) && (resume.ContentLength <= 4194304))//4194304 is the max by ASP.net (4MB)
+                    {
+                        //if its in the list rename using a guid
+                        fileName = Guid.NewGuid() + ext;
+
+
+                        //save to the webserver
+                        resume.SaveAs(Server.MapPath("~/Content/img/resume/" + fileName));
+
+                        //Make sure you are not deleting your default ---------Ask Jeff about this
+
+
+                        //only save if the file meets criteria imageName to the object
+                        userDetail.ResumeFileName = fileName;
+
+                    }//end if
+
+
+
+                }//end if
+
+                //If the file is bad (not in our list or NO file was included) the HiddenFor() in the view will care for retaining the value.
+
+                #endregion
+
                 db.Entry(userDetail).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                
+
+
+                return RedirectToAction("Index", "UserDetails");
             }
+            // If we got this far, something failed, redisplay form
             return View(userDetail);
         }
+
+
+
+
 
         // GET: UserDetails/Delete/5
         public ActionResult Delete(string id)
@@ -136,3 +185,4 @@ namespace InsuraTech.Controllers
         }
     }
 }
+

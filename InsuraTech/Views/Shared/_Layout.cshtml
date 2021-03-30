@@ -46,17 +46,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
                 <a class="navbar-brand" href="@Url.Action("Index", "Home")">InsuraTech</a>
             </div>
             <div class="navbar-collapse collapse">
                 @if (Request.IsAuthenticated && User.IsInRole("Admin") || Request.IsAuthenticated && User.IsInRole("Manager") || Request.IsAuthenticated && User.IsInRole("Employee"))
                 {
                     <ul class="nav navbar-nav">
-                        <li class="dropdown active">
+                        <li role="presentation" class="navbar-nav">
                             <a href="@Url.Action("Index", "Home")">Home</a>
                         </li>
-                        <li><a href="@Url.Action("Index", "OpenPositions")">Careers</a></li>
+                        <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "OpenPositions")">Careers</a></li>
 
 
 
@@ -64,7 +63,7 @@
 
                         @if (Request.IsAuthenticated && User.IsInRole("Manager"))
                         {
-                            <li><a href="@Url.Action("Index", "Applications")">Applications</a></li>
+                            <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "Applications")">Applications</a></li>
 
 
                         }
@@ -73,17 +72,17 @@
 
                         @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <li><a href="@Url.Action("Index", "Positions")">Positions</a></li>
-                            <li><a href="@Url.Action("Index", "Locations")">Locations</a></li>
+                            <li  role="presentation"class="navbar-nav"><a href="@Url.Action("Index", "Positions")">Positions</a></li>
+                            <li  role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "Locations")">Locations</a></li>
 
                             <li class="dropdown">
                                 <a href="~/Content/#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="@Url.Action("Index", "Applications")">Applications</a></li>
-                                    <li><a href="@Url.Action("Index", "ApplicationStatus")">Application Statuses</a></li>
-                                    <li><a href="@Url.Action("Index", "UsersAdmin")">User Roles</a></li>
-                                    <li><a href="@Url.Action("Index", "RolesAdmin")">Admin Roles</a></li>
-                                    <li><a href="@Url.Action("Index", "UserDetails")">User Details</a></li>
+                                    <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "Applications")">Applications</a></li>
+                                    <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "ApplicationStatus")">Application Statuses</a></li>
+                                    <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "UsersAdmin")">User Roles</a></li>
+                                    <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "RolesAdmin")">Admin Roles</a></li>
+                                    <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "UserDetails")">User Details</a></li>
 
                                 </ul>
                             </li>
@@ -91,9 +90,9 @@
 
                         @if (Request.IsAuthenticated && User.IsInRole("Employee"))
                         {
-                            <li><a href="@Url.Action("Index", "UserDetails")">My Profile</a></li>
-                            <li><a href="@Url.Action("Index", "Applications")">My Apps</a></li>
-                            <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+                            <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "UserDetails")">My Profile</a></li>
+                            <li role="presentation" class="navbar-nav"><a href="@Url.Action("Index", "Applications")">My Apps</a></li>
+                            <li role="presentation" class="navbar-nav"><a href="@Url.Action("Contact", "Home")">Contact</a></li>
 
                         }
 
