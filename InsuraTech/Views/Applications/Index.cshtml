@@ -34,6 +34,9 @@
                     @Html.DisplayNameFor(model => model.OpenPosition.Position.Title)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.OpenPosition.Location.City)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.UserDetail.FirstName)
                 </th>
                 <th>
@@ -46,38 +49,41 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ApplicationDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ManagerNotes)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ResumeFileName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserDetail.LastName)
-                    </td>
-                    <td>
-                        @if (Request.IsAuthenticated && User.IsInRole("Manager"))
-                        {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId })
-                        }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManagerNotes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResumeFileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationStatu.StatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenPosition.Position.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.OpenPosition.Location.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserDetail.LastName)
+                </td>
+                <td>
+                    @if (Request.IsAuthenticated && User.IsInRole("Manager"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationId })
+                    }
 
-                        @Html.ActionLink("Details", "Details", new { id = item.ApplicationId })
-                        @*@Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })*@
-                    </td>
-                </tr>
+                    @Html.ActionLink("Details", "Details", new { id = item.ApplicationId })
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.ApplicationId })*@
+                </td>
+            </tr>
             }
         </tbody>
 
