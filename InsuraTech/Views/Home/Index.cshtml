@@ -16,7 +16,9 @@
         @if (Request.IsAuthenticated && User.IsInRole("Admin") || Request.IsAuthenticated && User.IsInRole("Manager") || Request.IsAuthenticated && User.IsInRole("Employee"))
         {
             <a href="@Url.Action("Index", "OpenPositions")"><button class="btn btn-embossed btn-primary">See Job Openings</button></a>
+
         }
+            <a href="~/Content/Project Documentation.pdf" target="_blank"><button class="btn btn-embossed btn-primary">Project Documentation</button></a>
 
     </div>
     <!-- /container -->
